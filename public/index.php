@@ -16,36 +16,36 @@
             <img src="assets/logo.png" alt="logo">
         </div>
         <div class="container-menu">
-        <nav>
-            <ul class="nav-list">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#acerca">Acerca de</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>     
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#acerca">Acerca de</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
     <div class="container">
         <div class="L">
             <div class="container-form">
-        <form action="#" method="post">
-            <div class="form-group">
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" name="edad" required placeholder="80">
-            </div>
-            <div class="form-group">
-                <label for="peso">Peso:</label>
-                <input type="peso" id="peso" name="peso" required placeholder="100Kg">
-            </div>
-            <div class="form-group">
-                <label for="talla">Talla:</label>
-                <input type="talla" id="talla" name="talla" required placeholder="1.65 m">
-            </div>
-            <div class="form-group">
-                <button type="submit">Generar dieta</button>
-            </div>
-        </form>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="edad">Edad:</label>
+                        <input type="number" id="edad" name="edad" required placeholder="80">
+                    </div>
+                    <div class="form-group">
+                        <label for="peso">Peso:</label>
+                        <input type="peso" id="peso" name="peso" required placeholder="100Kg">
+                    </div>
+                    <div class="form-group">
+                        <label for="talla">Talla:</label>
+                        <input type="talla" id="talla" name="talla" required placeholder="1.65 m">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Generar dieta</button>
+                    </div>
+                </form>
             </div>
             <div class="container-noticias">
 
@@ -57,15 +57,15 @@
                 <div class="container-detalles">
                     <H2>Desayuno</H2>
                     <span>
-    <ul>
-        <li>200 gramos de fresas</li>
-        <li>1 kiwi</li>
-        <li>2 peras</li>
-        <li>4 huevos</li>
-        <li>50 gramos de azúcar moreno</li>
-        <li>1 cucharadita de levadura en polvo</li>
-    </ul>
-</span>
+                        <ul>
+                            <li>200 gramos de fresas</li>
+                            <li>1 kiwi</li>
+                            <li>2 peras</li>
+                            <li>4 huevos</li>
+                            <li>50 gramos de azúcar moreno</li>
+                            <li>1 cucharadita de levadura en polvo</li>
+                        </ul>
+                    </span>
 
                 </div>
                 <div class="container-calorias">

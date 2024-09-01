@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.background-image {
+    width: 600px; /* Ajusta el tamaño según tus necesidades */
+    height: auto;
+    display: block;
+}
+
+.typing-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', monospace;
+    font-size: 24px;
+    color: white; /* Ajusta el color según el fondo de la imagen */
+    overflow: hidden; /* Evita que el texto se desborde */
+    border-right: 2px solid white; /* Simula el cursor */
+    max-width: 90%; /* Limita el ancho al 90% del contenedor */
+    width: 0; /* Ancho inicial para la animación */
+    animation: typing 8s steps(40) 1s forwards, blink 0.75s step-end infinite;
+    line-height: 1.5; /* Espaciado entre líneas */
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    0% {
+        border-color: white;
+    }
+    50% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: white;
+    }
+}
