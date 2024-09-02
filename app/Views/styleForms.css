@@ -1,0 +1,65 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vb;
+}
+
+
+.container-L , .container-R {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-animacion {
+    position: relative; /* Para posicionar el texto de manera absoluta en relación a este contenedor */
+    display: inline-block; /* Para ajustar el tamaño del contenedor al tamaño de la imagen */
+}
+
+
+.container-L img{
+    width: 100%;
+    height: 100vh; 
+    display: block;
+}
+
+
+/* Efecto de Escritura */
+.typing-effect {
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición al centro exacto */
+    text-align: center; /* Alinea el texto en el centro */
+    font-size: 50px;
+    font-family: monospace;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden; /* Oculta cualquier texto que se salga del contenedor */
+    max-width: 90%; /* Ajusta el ancho máximo para que el texto no se desborde */
+    border-right: 3px solid white; /* Efecto de cursor parpadeante */
+    font-weight: bold;
+}
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: white; }
+}
+
+.typing-effect span {
+    display: inline-block;
+    animation: typing 4s steps(30, end) infinite, blink 0.75s step-end infinite;
+}

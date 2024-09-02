@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Persona.php';
 class Paciente extends Persona
 {
     private $telefono;
@@ -30,6 +30,8 @@ class Paciente extends Persona
         $this->cui = $cui;
         $this->sexo = $sexo;
         $this->talla = $talla;
+        $this->telefono = $telefono;
+        $this->fechaNacimiento = $fechaNacimiento;
     }
 
 
