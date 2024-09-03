@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario</title>
-    <link rel="stylesheet" href="styleForms.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/styleForms.css">
+    <link rel="stylesheet" href="style/form.css">
 </head>
 
 <body>
@@ -20,7 +20,6 @@
     </div>
     <div class="container-R">
         <div class="container-forms">
-        <h2>Regístrate ahora y sé parte de algo grandioso.</h2> <br>
             <form action="../Controllers/RestController/RegistrarPaciente.php" method="post">
                 <div class="mb-3">
                     <label for="exampleInputText" class="form-label">Nombre</label>
@@ -53,7 +52,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label for="exampleInputNumber" class="form-label">Género</label>
-                        <select class="form-select" aria-label="Genero" name="gender">
+                        <select class="form-control" aria-label="Genero" name="gender">
                             <option value="F">Femenino</option>
                             <option value="M">Masculino</option>
                         </select>
@@ -79,5 +78,5 @@
         </div>
     </div>
 </body>
-<script src="animacion.js"></script>
+<script src="js/animacion.js"></script>
 </html>

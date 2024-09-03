@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <link rel="stylesheet" href="styleForms.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-
-<body>
-    <div class="container-R">
+    <?php require_once('header.php'); ?>
+    <div class="container-R" >
         <div class="container-forms">
         <h2>Regístrate ahora y sé parte de algo grandioso.</h2> <br>
             <form action="#" method="post">
@@ -64,7 +54,4 @@
             </form>
         </div>
     </div>
-</body>
 <script src="DatosPerfil.js"></script>
-
-</html>
