@@ -1,42 +1,23 @@
 <?php
 class Alimento
 {
-    private $id_alimento;
     private $nombre;
     private $indiceGlusemico;
+    private $cantidad;
     private $idCategoria;
 
     public function __construct(
-        $id_alimento,
         $nombre,
         $indiceGlusemico,
+        $cantidad,
         $idCategoria
     ) {
-        $this->id_alimento = $id_alimento;
         $this->nombre = $nombre;
         $this->indiceGlusemico = $indiceGlusemico;
+        $this->cantidad = $cantidad;
         $this->idCategoria = $idCategoria;
     }
 
-    /**
-     * Get the value of id_alimento
-     */
-    public function getId_alimento()
-    {
-        return $this->id_alimento;
-    }
-
-    /**
-     * Set the value of id_alimento
-     *
-     * @return  self
-     */
-    public function setId_alimento($id_alimento)
-    {
-        $this->id_alimento = $id_alimento;
-
-        return $this;
-    }
 
     /**
      * Get the value of nombre
@@ -94,6 +75,26 @@ class Alimento
     public function setIdCategoria($idCategoria)
     {
         $this->idCategoria = $idCategoria;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cantidad
+     */ 
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
+    /**
+     * Set the value of cantidad
+     *
+     * @return  self
+     */ 
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
 
         return $this;
     }

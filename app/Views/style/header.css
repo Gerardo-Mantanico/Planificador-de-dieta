@@ -1,27 +1,36 @@
+/* Resetear margen por defecto y definir fuente */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
 }
 
+/* Estilo del encabezado */
 header {
-    background-color: #333;
+    background-color: #84dbb7;
+    position: fixed;
+    width: 100%;
+    margin-bottom: 20px;
+    
 }
 
+/* Estilo de la barra de navegación */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
     color: #fff;
 }
 
+/* Estilo del logo */
 .logo a {
+    margin-left: 40px;
     color: #fff;
     text-decoration: none;
     font-size: 24px;
     font-weight: bold;
 }
 
+/* Estilo de los enlaces de navegación */
 .nav-links {
     list-style: none;
     display: flex;
@@ -34,7 +43,7 @@ header {
 }
 
 .nav-links a {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     font-size: 18px;
 }
@@ -56,26 +65,7 @@ header {
     margin: 3px 0;
 }
 
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #333;
-    }
 
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links li {
-        margin: 15px 0;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-}
 
 section {
     padding: 60px 20px;
@@ -85,4 +75,66 @@ section {
 h1, h2 {
     margin: 0;
 }
-3
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Estilo del menú */
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #0077467e;
+}
+
+.menu > li {
+    position: relative;
+    display: inline-block;
+}
+
+.menu > li > a {
+    display: block;
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.menu > li > a:hover {
+    background-color:  #0077453b;
+}
+
+/* Estilo del submenú */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #068850af;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu li {
+    width: 200px;
+    height: 40px;
+}
+
+.submenu li a {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    background-color: #129c63;
+}
+
+/* Mostrar el submenú al pasar el ratón sobre el elemento principal */
+.menu > li:hover .submenu {
+    display: block;
+}

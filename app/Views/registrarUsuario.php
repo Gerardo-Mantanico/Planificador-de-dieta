@@ -23,7 +23,7 @@
             <form action="../Controllers/RestController/RegistrarPaciente.php" method="post">
                 <div class="mb-3">
                     <label for="exampleInputText" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputText" name="name" disabled>
+                    <input type="text" class="form-control" id="exampleInputText" name="name">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputText" class="form-label">Nombre de usuario</label>

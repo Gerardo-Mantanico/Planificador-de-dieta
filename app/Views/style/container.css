@@ -1,0 +1,25 @@
+.container-r , .container-l {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.img-hemoglobina{
+    margin-top: 20px;
+    width: 60%;
+    height: 60vh;
+}
+.container-text{
+    margin-top: 12px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+p{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+}

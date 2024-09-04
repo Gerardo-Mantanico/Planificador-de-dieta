@@ -50,13 +50,7 @@ function registrar(Paciente $paciente)
             echo "Error al ejecutar el procedimiento almacenado: " . $query->error;
         }
         $query->close();
-    
     } catch (Exception $e) {
         echo "Error";
     }
-
-
 }
-
-
-?>

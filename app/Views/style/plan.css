@@ -1,20 +1,3 @@
-*{
-    margin: 0%;
-    padding: 0;
-}
-body{
-    background-color: rgb(252, 252, 252);
-    width: 100%;
-    height: 100vh;
-}
-
-header{
-    width: 100%;
-    height: 40px;
-    background-color: #c7e6d7;
-    display: flex;
-    gap: 80px;
-}
 
 .container-menu{
     width: 100%;
@@ -28,11 +11,6 @@ img{
     height: 40px;
 }
 
-.container{
-    width: 100%;
-    height: 100Vh;
-    display:  flex;
-}
 
 .L{
     width: 30%;
@@ -41,7 +19,8 @@ img{
     align-items: center;
     flex-direction: column;
     gap: 40px;
-    margin-top: 25px;
+    margin-top: 175px;
+   
 }
 
 .container-form{
@@ -69,21 +48,26 @@ img{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 150px;
     gap: 16px;
 }
 
 .card{
     width: 95%;
-    height: 200px;
+    height: 15%;
     background-color: rgb(233, 233, 233);
     border-radius: 10px;
     display:  flex;
+    justify-content: center;
+    align-items: center;
+
 }
 .container-detalles{
     width: 50%;
+    height: 200px;
     display: flex;
     justify-content: flex-start;
+   /* background-color: #646F58;*/
     align-items: center;
     flex-direction: column;
 
@@ -94,6 +78,7 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .container-calorias p {
@@ -161,33 +146,35 @@ h2 {
     background-color: #7D8570;
 }
 
-nav {
-    max-width: 100%;
-    height: 40px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    background-color: #4ebb98;
-    justify-content: flex-end;
+span{
+    white-space: pre-line;;
 }
 
-.nav-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.container-noticias{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.nav-list li {
-    margin: 0 15px;
+.cotainer-favorite{
+    margin-top: 60px;
+    width: 100%;
 }
 
-.nav-list a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    padding: 5px 10px;
-    border-radius: 5px;
+button{
+    background-color: white;
+    margin: none;
+    border: none;
 }
 
+.icon {
+    fill: #000000; 
+    transition: fill 0.3s ease; 
+}
+.icon:hover {
+    fill: #ff0000; 
+    stroke: none;
+}
+.calification{
+    display: flex;
+}

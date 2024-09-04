@@ -78,4 +78,10 @@
     display: flex;
     gap: 20px;
 }
-   
+
+.icono{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
