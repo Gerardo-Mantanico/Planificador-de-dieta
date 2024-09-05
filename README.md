@@ -17,10 +17,10 @@ La aplicación sugiere recetas equilibradas y nutritivas que ayudan a controlar 
 Se proporcionan opciones para diferentes tipos de comidas (desayuno, almuerzo, cena y snacks) con recetas que tienen bajo índice glucémico, son ricas en fibra y proteínas, y bajas en carbohidratos refinados.
 Control y Monitoreo de Glucosa:
 
+[![2024-09-05-113304-1600x900-scrot.jpg](https://i.postimg.cc/Rh68Jkm2/2024-09-05-113304-1600x900-scrot.jpg)](https://postimg.cc/T5xQZHpc)
 
 
 
-## Uso
 
 ### Ejecución del programa
 Ingresar al www.saludEducativa.com
@@ -30,8 +30,8 @@ Ingresar al www.saludEducativa.com
 
 ## Versión 1.0.0
 
-- **Fecha**: 25/05/2024
-- **Descripción**: Implementación inicial de la funcionalidad básica de conversión de monedas.
+- **Fecha**: 05/09/2024
+- **Descripción**: Generador de Planes Alimenticios para Diabetes Tipo 2.
 
 ## Autor
 
