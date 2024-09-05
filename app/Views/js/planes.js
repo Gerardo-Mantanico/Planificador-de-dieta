@@ -1,5 +1,5 @@
 
-let id = 1;
+let id =1;
 const cardContainer = document.querySelector('.R'); // Ajusta esto al selector adecuadoa
 menu();
 document.getElementById('addElementButton').addEventListener('click', () => {
@@ -19,7 +19,9 @@ document.getElementById('beforeButton').addEventListener('click', () => {
 });
 
 function menu() {
-    fetch('http://localhost/Planificador-de-dieta/app/Model/Repository/MenuDB.php?id=' + id)
+    
+    console.log('http://localhost/Planificador-de-dieta/app/Model/Repository/MenuDB.php?id='+id);
+    fetch('http://localhost/Planificador-de-dieta/app/Model/Repository/MenuDB.php?id='+id)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);

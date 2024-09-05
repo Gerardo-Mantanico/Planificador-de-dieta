@@ -118,4 +118,4 @@ function tiempoComida($id,  $comida, $conn, $query)
     }
 }
 
-menu($gid);
+menu($id);
