@@ -27,7 +27,7 @@
             <form  action="../Controllers/RestController/Login.php" method="post">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
-                    <input type="email" class="form-control" id="name" aria-describedby="emailHelp" name="email">
+                    <input type="email" class="form-control" id="name"  name="email">
                 </div>
 
                 <div class="mb-3">
