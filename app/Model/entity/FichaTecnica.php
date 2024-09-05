@@ -1,6 +1,6 @@
 <?php
 
-class FichaTecnica{
+class FichaTecnica implements JsonSerializable{
     private $id;
     private $idUsuario;
     private $edad;
@@ -11,7 +11,7 @@ class FichaTecnica{
     private $fechaVencimiento;
     private $estado;
 
-    public function __construct(
+  /*  public function __construct(
         $id,
         $idUsuario,
         $edad,
@@ -22,6 +22,8 @@ class FichaTecnica{
         $fechaVencimiento,
         $estado
     )
+
+
     {
         $this->id  = $id;
         $this->idUsuario =   $idUsuario;
@@ -34,8 +36,22 @@ class FichaTecnica{
         $this->estado =  $estado;
 
     }
-
+*/
     
+    public function jsonSerialize(): mixed{
+        return [
+            'id' => $this->id,
+            'idUsuario' => $this->idUsuario,
+            'edad' => $this->edad,
+            'peso' => $this->peso,
+            'glucosa' => $this->glucosa,
+            'imc' => $this->imc,
+            'fechaCreacion' => $this->fechaCreacion,
+            'fechaVencimiento' => $this->fechaVencimiento,
+            'estado' => $this->estado,
+        ];
+    }
+
 
     /**
      * Get the value of id

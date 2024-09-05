@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style/login.css">
     <link rel="stylesheet" href="style/plan.css">
     <link rel="stylesheet" href="style/container.css">
+    <link rel="stylesheet" href="style/historial.css">
 </head>
 
 <body>

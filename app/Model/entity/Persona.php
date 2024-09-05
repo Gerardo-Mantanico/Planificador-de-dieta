@@ -1,5 +1,5 @@
 <?php
-class Persona
+class Persona implements JsonSerializable
 {
     private $id;
     private $nombre;
@@ -18,6 +18,21 @@ class Persona
         $this->correo = $correo;
         $this->rol = $rol;
     }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'nombre' => $this->nombre,
+            'usuario' => $this->usuario,
+            'contrasena' => $this->contrasena,
+            'correo' => $this->correo,
+            'rol' => $this->rol,
+        ];
+    }
+
+
+
 
     public function getId()
     {

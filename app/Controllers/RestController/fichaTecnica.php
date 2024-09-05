@@ -20,7 +20,7 @@ $ficha = new FichaTecnica(
     null  
 );
 
-registrar($ficha);
+//registrar(1);
 
 
 ?>

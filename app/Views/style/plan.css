@@ -1,29 +1,28 @@
-
-.container-menu{
+.container-menu {
     width: 100%;
     height: 40px;
     display: flex;
     justify-content: flex-end;
 }
-img{
+
+img {
     margin-left: 50px;
     width: 150px;
     height: 40px;
 }
 
 
-.L{
+.L {
     width: 30%;
-    height: 100vh;
     display: flex;
+    background-color: #ff0000;
     align-items: center;
     flex-direction: column;
     gap: 40px;
-    margin-top: 175px;
-   
+    position: fixed;
 }
 
-.container-form{
+.container-form {
     width: 80%;
     height: 50%;
     background-color: rgb(233, 233, 233);
@@ -33,47 +32,52 @@ img{
     align-items: center;
     flex-direction: column;
 }
-.container-noticias{
+
+.container-noticias {
     width: 80%;
     height: 25%;
     background-color: rgb(233, 233, 233);
     border-radius: 8px;
 }
 
-.R{
+.R {
     width: 80%;
-    height: 100vh;
-   /* background-color: rgb(196, 127, 37);*/
-    display:  flex;
+    /* background-color: rgb(196, 127, 37);*/
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 150px;
     gap: 16px;
+    margin-top: 115px;
 }
 
-.card{
+.card {
     width: 95%;
-    height: 15%;
-    background-color: rgb(233, 233, 233);
+    height: 40vh;
+    background-color: rgb(247 247 248);
+    /*  background-color: blueviolet;*/
     border-radius: 10px;
-    display:  flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 
 }
-.container-detalles{
+
+.container-detalles {
     width: 50%;
-    height: 200px;
+    height: 40vh;
     display: flex;
     justify-content: flex-start;
-   /* background-color: #646F58;*/
-    align-items: center;
+    /*  background-color: #646F58;*/
+    /* align-items: center;*/
     flex-direction: column;
+
 
 }
 
-.container-calorias{
+
+
+.container-calorias {
     width: 20%;
     display: flex;
     justify-content: center;
@@ -89,15 +93,19 @@ img{
 
 .container-img {
     width: 30%;
-    overflow: hidden; /* Oculta cualquier contenido que se desborde */
-    display: flex; /* Usa flexbox para alinear la imagen si es necesario */
-    align-items: center; /* Centra la imagen verticalmente si el contenedor tiene altura */
-    justify-content: center; /* Centra la imagen horizontalmente si el contenedor tiene ancho */
+    overflow: hidden;
+    /* Oculta cualquier contenido que se desborde */
+    display: flex;
+    /* Usa flexbox para alinear la imagen si es necesario */
+    align-items: center;
+    /* Centra la imagen verticalmente si el contenedor tiene altura */
+    justify-content: center;
+    /* Centra la imagen horizontalmente si el contenedor tiene ancho */
 }
 
 .container-img img {
     width: 90%;
-    height:  90%;
+    height: 90%;
     border-radius: 8px;
     margin-right: 40px;
 }
@@ -122,7 +130,7 @@ h2 {
     color: #666;
 }
 
-.form-group input{
+.form-group input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -146,35 +154,64 @@ h2 {
     background-color: #7D8570;
 }
 
-span{
-    white-space: pre-line;;
+span {
+    white-space: pre-line;
+    text-align: left;
 }
 
-.container-noticias{
+.container-noticias {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.cotainer-favorite{
+.cotainer-favorite {
     margin-top: 60px;
-    width: 100%;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 10px;
+    /* Asegúrate de ajustar estas propiedades */
 }
 
-button{
+button {
     background-color: white;
     margin: none;
     border: none;
 }
 
 .icon {
-    fill: #000000; 
-    transition: fill 0.3s ease; 
+    fill: #000000;
+    transition: fill 0.3s ease;
 }
+
 .icon:hover {
-    fill: #ff0000; 
+    fill: #ff0000;
     stroke: none;
+    cursor: pointer;
 }
-.calification{
+
+.calification {
     display: flex;
+}
+
+.icon-next :hover {
+    fill: #504B3A;
+    cursor: pointer;
+}
+
+
+.span-alimentos{
+    gap: 10px;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow-y: auto; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+
+}
+
+.span-alimentos::-webkit-scrollbar {
+    display: none;
 }

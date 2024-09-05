@@ -1,5 +1,7 @@
 <?php
-    class Comida{
+  require_once('Alimento.php');
+    class Comida implements JsonSerializable  {
+        private $id;
         private $tipoComida;
         private $horaInicial;
         private $horafinal;
@@ -10,6 +12,28 @@
         private $calificacion;
 
         
+
+        public function jsonSerialize(): mixed {
+                return [
+                    'id' => $this->id,
+                    'tipoComida' => $this->tipoComida,
+                    'horaInicial' => $this->horaInicial,
+                    'horaFinal' => $this->horafinal,
+                    'totalKcal' => $this->totalKcal,
+                    'tipo' => $this->tipo,
+                    'arrayDeAlimentos' => $this->arrayDeAlimentos,
+                    'img' => $this->img,
+                    'calificacion' => $this->calificacion
+                ];
+            }
+
+
+            public function addAlimento(Alimento $alimento) {
+                $this->arrayDeAlimentos[] = $alimento;
+            }
+
+
+
         /**
          * Get the value of tipoComida
          */ 
@@ -166,6 +190,26 @@
         public function setCalificacion($calificacion)
         {
                 $this->calificacion = $calificacion;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
 
                 return $this;
         }

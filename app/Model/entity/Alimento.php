@@ -1,6 +1,5 @@
 <?php
-class Alimento
-{
+class Alimento implements JsonSerializable {
     private $nombre;
     private $indiceGlusemico;
     private $cantidad;
@@ -16,6 +15,16 @@ class Alimento
         $this->indiceGlusemico = $indiceGlusemico;
         $this->cantidad = $cantidad;
         $this->idCategoria = $idCategoria;
+    }
+
+ 
+    public function jsonSerialize(): mixed {
+        return [
+            'nombre' => $this->nombre,
+            'indice glusemico' => $this->indiceGlusemico,
+            'cantidad' => $this->cantidad,
+            'categorioa' => $this->idCategoria,
+        ];
     }
 
 

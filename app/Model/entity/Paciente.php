@@ -1,7 +1,7 @@
 <?php
 require_once 'Persona.php';
-class Paciente extends Persona
-{
+class Paciente extends Persona  implements JsonSerializable
+{ 
     private $telefono;
     private $fechaNacimiento;
     private $direccion;
@@ -34,6 +34,24 @@ class Paciente extends Persona
         $this->fechaNacimiento = $fechaNacimiento;
     }
 
+
+    public function jsonSerialize(): mixed
+    {
+        $datosPersona = parent::jsonSerialize();
+        $datosUsuario = [
+           'telefono' => $this->telefono,
+            'fechaNacimiento' => $this->fechaNacimiento,
+            'direccion' => $this->direccion,
+            'cui' => $this->cui,
+            'sexo' => $this->sexo,
+            'talla' => $this->talla
+        ];
+
+        // Combinar ambos arrays
+        return array_merge($datosPersona, $datosUsuario);
+    }
+
+    
 
     public function getTelefono()
     {

@@ -1,0 +1,658 @@
+
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE  PROCEDURE `historial_ficha_tecnica` (IN `id` BIGINT)   SELECT  f.edad, f.peso, f.glucosa, g.glucosa_minima, g.glucosa_maxima, g.tipo, f.imc, f.fecha_creacion, f.fecha_finalizacion, f.estado
+FROM ficha_tecnica f 
+INNER JOIN glucosa g  
+ON f.glucosa BETWEEN g.glucosa_minima AND g.glucosa_maxima  
+WHERE f.id_usuario = id
+ORDER BY f.fecha_creacion ASC$$
+
+CREATE  PROCEDURE `insertar_paciente` (IN `p_nombre` VARCHAR(72), IN `p_usuario` VARCHAR(72), IN `p_contrasena` VARCHAR(30), IN `p_correo` VARCHAR(255), IN `p_rol` CHAR(1), IN `p_telefono` INT(8), IN `p_fecha_nacimiento` DATE, IN `p_direccion` VARCHAR(255), IN `p_cui` BIGINT, IN `p_sexo` CHAR(1), IN `p_talla` DECIMAL(10,2))   BEGIN 
+	DECLARE id LONG;
+    CALL insertar_usuario(p_nombre, p_usuario, p_contrasena, p_correo, p_rol,id);
+    INSERT INTO paciente (id_usuario,telefono,fecha_nacimiento,direccion,cui,sexo,talla)
+    VALUES (id, p_telefono, p_fecha_nacimiento, p_direccion, p_cui,p_sexo,p_talla);
+END$$
+
+CREATE  PROCEDURE `insertar_usuario` (IN `p_nombre` VARCHAR(72), IN `p_usuario` VARCHAR(72), IN `p_contrasena` VARCHAR(30), IN `p_correo` VARCHAR(255), IN `p_rol` CHAR(1), OUT `p_id_usuario` BIGINT)   BEGIN
+    INSERT INTO usuario (nombre, usuario, contrasena, correo, rol)
+    VALUES (p_nombre, p_usuario, p_contrasena, p_correo, p_rol);
+    SET p_id_usuario = LAST_INSERT_ID();
+END$$
+
+CREATE  PROCEDURE `insert_ficha_tecnica` (IN `id_usuario` BIGINT, IN `edad` DECIMAL(10,2), IN `peSO` DECIMAL(10,2), IN `glucosa` INT)   begin
+    INSERT INTO ficha_tecnica  (`id_usuario`, `edad`, `peso`, `glucosa`, `imc`, `estado`) 
+    VALUES (id_usuario, edad, peso, glucosa, obtener_imc(54, 1), true);
+end$$
+
+--
+-- Funciones
+--
+CREATE  FUNCTION `login` (`correo` VARCHAR(255), `contrasena` VARCHAR(30)) RETURNS BIGINT(20)  BEGIN 
+ DECLARE id BIGINT;
+
+ SELECT id_usuario INTO id
+ from usuario where usuario.correo = correo and  usuario.contrasena=contrasena;
+ RETURN id;
+END$$
+
+CREATE  FUNCTION `obtener_imc` (`peso` DECIMAL(10,2), `id` BIGINT) RETURNS DECIMAL(10,2)  BEGIN
+  DECLARE imc decimal(10,2);
+  DECLARE altura decimal(10,2);
+ 
+  SELECT talla  INTO altura FROM paciente where id_usuario=id;
+  
+  SET imc = peso / (altura *altura);
+  RETURN imc;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alimento`
+--
+
+CREATE TABLE `alimento` (
+  `id_alimento` bigint(20) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `indice_glucemico` int(11) NOT NULL,
+  `Cantidad` varchar(25) NOT NULL,
+  `id_categoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almuerzo`
+--
+
+CREATE TABLE `almuerzo` (
+  `id_almuerzo` bigint(20) NOT NULL,
+  `hora_inicial` time NOT NULL,
+  `hora_final` time NOT NULL,
+  `total_kcal` int(11) NOT NULL,
+  `tipo` varchar(72) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id_categoria` int(11) NOT NULL,
+  `nombre` varchar(75) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+--
+-- Estructura de tabla para la tabla `cena`
+--
+
+CREATE TABLE `cena` (
+  `id_cena` bigint(20) NOT NULL,
+  `hora_inicial` time NOT NULL,
+  `hora_final` time NOT NULL,
+  `total_kcal` int(11) NOT NULL,
+  `tipo` varchar(72) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+--
+-- Estructura Stand-in para la vista `comestibles`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `comestibles` (
+`id_alimento` bigint(20)
+,`nombre` varchar(100)
+,`indice_glucemico` int(11)
+,`Cantidad` varchar(25)
+,`categoria` varchar(75)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `desayuno`
+--
+
+CREATE TABLE `desayuno` (
+  `id_desayuno` bigint(20) NOT NULL,
+  `hora_inicial` time NOT NULL,
+  `hora_final` time NOT NULL,
+  `total_kcal` int(11) NOT NULL,
+  `tipo` varchar(72) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+--
+-- Estructura de tabla para la tabla `detalle_almuerzo`
+--
+
+CREATE TABLE `detalle_almuerzo` (
+  `id_almuerzo` bigint(20) NOT NULL,
+  `id_alimentos` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_cena`
+--
+
+CREATE TABLE `detalle_cena` (
+  `id_cena` bigint(20) NOT NULL,
+  `id_alimentos` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_desayuno`
+--
+
+CREATE TABLE `detalle_desayuno` (
+  `id_desayuno` bigint(20) NOT NULL,
+  `id_alimentos` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_refaccion_depertina`
+--
+
+CREATE TABLE `detalle_refaccion_depertina` (
+  `id_refaccion_despertina` bigint(20) NOT NULL,
+  `id_alimentos` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_refaccion_depertina`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_refaccion_matutina`
+--
+
+CREATE TABLE `detalle_refaccion_matutina` (
+  `id_refaccion_matutina` bigint(20) NOT NULL,
+  `id_alimentos` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_refaccion_matutina`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `dieta`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `dieta` (
+`id_menu` bigint(20)
+,`id_desayuno` bigint(20)
+,`d_hora_inicial` time
+,`d_hora_final` time
+,`d_total_kcal` int(11)
+,`d_tipo` varchar(72)
+,`id_almuerzo` bigint(20)
+,`a_hora_inicial` time
+,`a_hora_final` time
+,`a_total_kcal` int(11)
+,`a_tipo` varchar(72)
+,`id_cena` bigint(20)
+,`c_hora_inicial` time
+,`c_hora_final` time
+,`c_total_kcal` int(11)
+,`c_tipo` varchar(72)
+,`id_refaccion_matutina` bigint(20)
+,`rm_hora_inicial` time
+,`rm_hora_final` time
+,`rm_total_kcal` int(11)
+,`rm_tipo` varchar(72)
+,`id_refaccion_despertina` bigint(20)
+,`rd_hora_inicial` time
+,`rd_hora_final` time
+,`rd_total_kcal` int(11)
+,`rd_tipo` varchar(72)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ficha_tecnica`
+--
+
+CREATE TABLE `ficha_tecnica` (
+  `id_fecha_tecnica` bigint(20) NOT NULL,
+  `id_usuario` bigint(20) NOT NULL,
+  `edad` int(11) NOT NULL,
+  `peso` decimal(10,2) NOT NULL,
+  `glucosa` int(11) NOT NULL,
+  `imc` decimal(10,2) NOT NULL,
+  `fecha_creacion` date DEFAULT curdate(),
+  `fecha_finalizacion` date NOT NULL,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+
+--
+-- Disparadores `ficha_tecnica`
+--
+DELIMITER $$
+CREATE TRIGGER `calcular_fecha` BEFORE INSERT ON `ficha_tecnica` FOR EACH ROW BEGIN
+    SET NEW.fecha_finalizacion = DATE_ADD(NEW.fecha_creacion, INTERVAL 7 DAY);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `glucosa`
+--
+
+CREATE TABLE `glucosa` (
+  `id_glucosa` int(11) NOT NULL,
+  `glucosa_minima` int(11) NOT NULL,
+  `glucosa_maxima` int(11) NOT NULL,
+  `tipo` varchar(72) NOT NULL,
+  `recomendacion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `glucosa`
+--
+------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `hemoglobina`
+--
+
+CREATE TABLE `hemoglobina` (
+  `id_hemoglobina` bigint(20) NOT NULL,
+  `id_paciente` bigint(20) NOT NULL,
+  `hemoglobina` int(11) NOT NULL,
+  `fecha_inicial` date DEFAULT curdate(),
+  `fecha_vencimiento` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Disparadores `hemoglobina`
+--
+DELIMITER $$
+CREATE TRIGGER `vencimiento_hemoglobina` BEFORE INSERT ON `hemoglobina` FOR EACH ROW BEGIN
+    SET NEW.fecha_vencimiento = DATE_ADD(NEW.fecha_inicial, INTERVAL 30 DAY);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `menu_dia`
+--
+
+CREATE TABLE `menu_dia` (
+  `id_menu` bigint(20) NOT NULL,
+  `id_desayuno` bigint(20) NOT NULL,
+  `id_refaccion_matutina` bigint(20) NOT NULL,
+  `id_almuerzo` bigint(20) NOT NULL,
+  `id_refaccion_despertina` bigint(20) NOT NULL,
+  `id_cena` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `menu_dia`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `paciente`
+--
+
+CREATE TABLE `paciente` (
+  `id_usuario` bigint(20) NOT NULL,
+  `telefono` int(8) UNSIGNED NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `cui` bigint(20) NOT NULL,
+  `sexo` char(1) NOT NULL,
+  `talla` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `paciente`
+--
+
+
+--
+-- Estructura Stand-in para la vista `perfil`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `perfil` (
+`id_usuario` bigint(20)
+,`nombre` varchar(72)
+,`usuario` varchar(72)
+,`correo` varchar(255)
+,`telefono` int(8) unsigned
+,`fecha_nacimiento` date
+,`direccion` varchar(255)
+,`cui` bigint(20)
+,`sexo` char(1)
+,`paciente` decimal(10,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `plan_alimenticio`
+--
+
+CREATE TABLE `plan_alimenticio` (
+  `id_plan` bigint(20) NOT NULL,
+  `fecha` date NOT NULL,
+  `id_usuario` bigint(20) NOT NULL,
+  `total_kcal` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `plan_alimenticio`
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `refaccion_despertina`
+--
+
+CREATE TABLE `refaccion_despertina` (
+  `id_refaccion_despertina` bigint(20) NOT NULL,
+  `hora_inicial` time NOT NULL,
+  `hora_final` time NOT NULL,
+  `total_kcal` int(11) NOT NULL,
+  `tipo` varchar(72) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `refaccion_despertina`
+--
+-----------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `refaccion_matutina`
+--
+
+CREATE TABLE `refaccion_matutina` (
+  `id_refaccion_matutina` bigint(20) NOT NULL,
+  `hora_inicial` time NOT NULL,
+  `hora_final` time NOT NULL,
+  `total_kcal` int(11) NOT NULL,
+  `tipo` varchar(72) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `refaccion_matutina`
+--
+ --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id_usuario` bigint(20) NOT NULL,
+  `nombre` varchar(72) NOT NULL,
+  `usuario` varchar(72) NOT NULL,
+  `contrasena` varchar(30) NOT NULL,
+  `correo` varchar(255) NOT NULL,
+  `rol` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `comestibles`
+--
+DROP TABLE IF EXISTS `comestibles`;
+
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `comestibles`  AS SELECT `al`.`id_alimento` AS `id_alimento`, `al`.`nombre` AS `nombre`, `al`.`indice_glucemico` AS `indice_glucemico`, `al`.`Cantidad` AS `Cantidad`, `ca`.`nombre` AS `categoria` FROM (`alimento` `al` join `categoria` `ca` on(`ca`.`id_categoria` = `al`.`id_categoria`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `dieta`
+--
+DROP TABLE IF EXISTS `dieta`;
+
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `dieta`  AS SELECT `m`.`id_menu` AS `id_menu`, `d`.`id_desayuno` AS `id_desayuno`, `d`.`hora_inicial` AS `d_hora_inicial`, `d`.`hora_final` AS `d_hora_final`, `d`.`total_kcal` AS `d_total_kcal`, `d`.`tipo` AS `d_tipo`, `a`.`id_almuerzo` AS `id_almuerzo`, `a`.`hora_inicial` AS `a_hora_inicial`, `a`.`hora_final` AS `a_hora_final`, `a`.`total_kcal` AS `a_total_kcal`, `a`.`tipo` AS `a_tipo`, `c`.`id_cena` AS `id_cena`, `c`.`hora_inicial` AS `c_hora_inicial`, `c`.`hora_final` AS `c_hora_final`, `c`.`total_kcal` AS `c_total_kcal`, `c`.`tipo` AS `c_tipo`, `rm`.`id_refaccion_matutina` AS `id_refaccion_matutina`, `rm`.`hora_inicial` AS `rm_hora_inicial`, `rm`.`hora_final` AS `rm_hora_final`, `rm`.`total_kcal` AS `rm_total_kcal`, `rm`.`tipo` AS `rm_tipo`, `rd`.`id_refaccion_despertina` AS `id_refaccion_despertina`, `rd`.`hora_inicial` AS `rd_hora_inicial`, `rd`.`hora_final` AS `rd_hora_final`, `rd`.`total_kcal` AS `rd_total_kcal`, `rd`.`tipo` AS `rd_tipo` FROM (((((`menu_dia` `m` join `desayuno` `d` on(`m`.`id_desayuno` = `d`.`id_desayuno`)) join `almuerzo` `a` on(`m`.`id_almuerzo` = `a`.`id_almuerzo`)) join `cena` `c` on(`m`.`id_cena` = `c`.`id_cena`)) join `refaccion_matutina` `rm` on(`rm`.`id_refaccion_matutina` = `m`.`id_refaccion_matutina`)) join `refaccion_despertina` `rd` on(`rd`.`id_refaccion_despertina` = `m`.`id_refaccion_despertina`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `perfil`
+--
+DROP TABLE IF EXISTS `perfil`;
+
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `perfil`  AS SELECT `u`.`id_usuario` AS `id_usuario`, `u`.`nombre` AS `nombre`, `u`.`usuario` AS `usuario`, `u`.`correo` AS `correo`, `p`.`telefono` AS `telefono`, `p`.`fecha_nacimiento` AS `fecha_nacimiento`, `p`.`direccion` AS `direccion`, `p`.`cui` AS `cui`, `p`.`sexo` AS `sexo`, `p`.`talla` AS `paciente` FROM (`usuario` `u` left join `paciente` `p` on(`p`.`id_usuario` = `u`.`id_usuario`)) ;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `alimento`
+--
+ALTER TABLE `alimento`
+  ADD PRIMARY KEY (`id_alimento`),
+  ADD KEY `id_categoria` (`id_categoria`);
+
+--
+-- Indices de la tabla `almuerzo`
+--
+ALTER TABLE `almuerzo`
+  ADD PRIMARY KEY (`id_almuerzo`);
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `cena`
+--
+ALTER TABLE `cena`
+  ADD PRIMARY KEY (`id_cena`);
+
+--
+-- Indices de la tabla `desayuno`
+--
+ALTER TABLE `desayuno`
+  ADD PRIMARY KEY (`id_desayuno`);
+
+--
+-- Indices de la tabla `ficha_tecnica`
+--
+ALTER TABLE `ficha_tecnica`
+  ADD PRIMARY KEY (`id_fecha_tecnica`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `glucosa`
+--
+ALTER TABLE `glucosa`
+  ADD PRIMARY KEY (`id_glucosa`);
+
+--
+-- Indices de la tabla `hemoglobina`
+--
+ALTER TABLE `hemoglobina`
+  ADD PRIMARY KEY (`id_hemoglobina`),
+  ADD KEY `id_paciente` (`id_paciente`);
+
+--
+-- Indices de la tabla `menu_dia`
+--
+ALTER TABLE `menu_dia`
+  ADD PRIMARY KEY (`id_menu`);
+
+--
+-- Indices de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `refaccion_despertina`
+--
+ALTER TABLE `refaccion_despertina`
+  ADD PRIMARY KEY (`id_refaccion_despertina`);
+
+--
+-- Indices de la tabla `refaccion_matutina`
+--
+ALTER TABLE `refaccion_matutina`
+  ADD PRIMARY KEY (`id_refaccion_matutina`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `usuario` (`usuario`),
+  ADD UNIQUE KEY `correo` (`correo`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `alimento`
+--
+ALTER TABLE `alimento`
+  MODIFY `id_alimento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+
+--
+-- AUTO_INCREMENT de la tabla `almuerzo`
+--
+ALTER TABLE `almuerzo`
+  MODIFY `id_almuerzo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `cena`
+--
+ALTER TABLE `cena`
+  MODIFY `id_cena` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `desayuno`
+--
+ALTER TABLE `desayuno`
+  MODIFY `id_desayuno` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `ficha_tecnica`
+--
+ALTER TABLE `ficha_tecnica`
+  MODIFY `id_fecha_tecnica` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `glucosa`
+--
+ALTER TABLE `glucosa`
+  MODIFY `id_glucosa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `hemoglobina`
+--
+ALTER TABLE `hemoglobina`
+  MODIFY `id_hemoglobina` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `menu_dia`
+--
+ALTER TABLE `menu_dia`
+  MODIFY `id_menu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `refaccion_despertina`
+--
+ALTER TABLE `refaccion_despertina`
+  MODIFY `id_refaccion_despertina` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `refaccion_matutina`
+--
+ALTER TABLE `refaccion_matutina`
+  MODIFY `id_refaccion_matutina` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `alimento`
+--
+ALTER TABLE `alimento`
+  ADD CONSTRAINT `alimento_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`);
+
+--
+-- Filtros para la tabla `ficha_tecnica`
+--
+ALTER TABLE `ficha_tecnica`
+  ADD CONSTRAINT `ficha_tecnica_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+
+--
+-- Filtros para la tabla `hemoglobina`
+--
+ALTER TABLE `hemoglobina`
+  ADD CONSTRAINT `hemoglobina_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_usuario`);
+
+--
+-- Filtros para la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD CONSTRAINT `paciente_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+COMMIT;
+
