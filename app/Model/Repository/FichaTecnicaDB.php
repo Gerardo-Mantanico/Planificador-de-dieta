@@ -3,13 +3,17 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
+
 require_once('ConexionDB.php');
 require_once('../../Model/entity/FichaTecnica.php');
 class CustomException extends Exception {}
 
-/*function registrar(FichaTecnica $ficha)
+$id = $_GET['id'];
+
+function registrar(FichaTecnica $ficha)
 {
     echo "id" . $ficha->getIdUsuario();
     global $conn;
@@ -37,40 +41,41 @@ class CustomException extends Exception {}
     } catch (Exception $e) {
         echo "Error" . $e;
     }
+}
+function obtenerFichaTecnica($id)
+{
+    global $conn;
+    $historial = array();
+    $query = "SELECT * FROM ficha_tecnica WHERE id_usuario= ?";
+    if ($stm = $conn->prepare($query)) { // Corregido aquí: Usa $query directamente
+        $stm->bind_param('s', $id);
+        $stm->execute();
+        $result = $stm->get_result();
+        $datos = array();
+        while ($row = $result->fetch_assoc()) {
+            $datos[] = $row;
+        }
+        $stm->close();
 
-    */
-    function obtenerFichaTecnica($id)
-    {
-        global $conn;
-        $ficha = new FichaTecnica();
-        $query = $conn->prepare("SELECT * FROM `ficha_tecnica` WHERE id_fecha_tecnica= ?");
-        if ($stmt = $conn->prepare($query)) {
-            $stmt->bind_param('s', $id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $datos = array();
-            while ($row = $result->fetch_assoc()) {
-                $datos[] = $row;
-            }
-            $stmt->close();
-
+        for ($i = 0; $i < count($datos); $i++) {
+            $ficha = new FichaTecnica();
             $ficha->setEdad($datos[0]['edad']);
             $ficha->setPeso($datos[0]['peso']);
             $ficha->setGlucosa($datos[0]['glucosa']);
             $ficha->setImc($datos[0]['imc']);
             $ficha->setFechaCreacion($datos[0]['fecha_creacion']);
             $ficha->setFechaVencimiento($datos[0]['fecha_finalizacion']);
-          
-          /*  $estado = $datos[0]['estado'];
+
+            $estado = $datos[0]['estado'];
             if ($estado == 1) {
                 $ficha->setEstado("activo");
             } else
-                $ficha->setEstado("vencido");*/
-
-            header('Content-Type: application/json');
-            echo json_encode($ficha);
+                $ficha->setEstado("vencido");
+            array_push($historial, $ficha);
         }
+
+        header('Content-Type: application/json');
+        echo json_encode($historial);
     }
-//}
-obtenerFichaTecnica(1);
-?>
+}
+obtenerFichaTecnica($id);

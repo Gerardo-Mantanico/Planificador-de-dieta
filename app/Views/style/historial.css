@@ -10,7 +10,7 @@ table {
 }
 
 table thead {
-    background: #00ff15;
+    background: #04770e;
     color: white;
 }
 
@@ -48,4 +48,5 @@ table thead {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }

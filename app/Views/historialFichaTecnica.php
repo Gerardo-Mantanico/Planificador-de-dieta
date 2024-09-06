@@ -1,38 +1,24 @@
 <?php require_once('header.php'); ?>
 <div class="container-historial">
-<table class="table">
-  <thead>
-    <tr>
-      <th >Edad</th>
-      <th >Peso Kg</th>
-      <th >Gluccosa del paciente</th>
-      <th >Glucosa minima</th>
-      <th >Glucosa maxima</th>
-      <th >Fecha de crean</th>
-      <th >Fecha de vencimiento</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+  <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#EA3323">
+    <path d="M80-590v-190q0-24 18-42t42-18h680q24 0 42 18t18 42v190h-60v-190H140v190H80Zm60 350q-24 0-42-18t-18-42v-230h60v230h680v-230h60v230q0 24-18 42t-42 18H140ZM40-120v-60h880v60H40Zm440-420ZM80-530v-60h240q8.16 0 15.58 4T347-574l55 112 131-231q4-8 11.5-11.5t15.62-3.5q8.12 0 15.5 3.5Q583-701 587-693l50.55 103H880v60H619q-8.25 0-15.75-4T592-546l-34-69-131 229q-3.72 8-11.17 12-7.45 4-15.64 4-8.19 0-15.69-4T373-386l-72-144H80Z" />
+  </svg>
+  <h2>Historial de fichas tecnicas</h2>
+  <table id="tablaDatos">
+    <thead>
+      <tr>
+        <th>Edad</th>
+        <th>Peso Kg</th>
+        <th>Gluccosa del paciente</th>
+        <th>Indice de masa corporal</th>
+        <th>Fecha de crean</th>
+        <th>Fecha de vencimiento</th>
+        <th>Estado de ficha tecnica </th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+    </tbody>
+  </table>
 </div>
-
-
-<?php  require_once("footer.php"); ?>
+<script src="js/fichasTecnicas.js"> </script>
+<?php require_once("footer.php"); ?>

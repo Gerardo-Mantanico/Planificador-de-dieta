@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$database = "planificadorDietaDB";
+$database = "Prueba";
 $username = "usuarioPD";
 $password = "Dietas2024";
 

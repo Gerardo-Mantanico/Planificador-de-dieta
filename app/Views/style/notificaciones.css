@@ -1,0 +1,52 @@
+
+   #notificaciones {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 1000;
+}
+
+
+.notificacion {
+    display: none; /* Ocultar notificaciones por defecto */
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Estilos para notificaciones de éxito */
+.notificacion.exito {
+    background-color: #28a745; /* Verde */
+}
+
+/* Estilos para notificaciones de advertencia */
+.notificacion.advertencia {
+    background-color: #ffc107; /* Amarillo */
+}
+
+/* Estilos para notificaciones de error */
+.notificacion.error {
+    background-color: #dc3545; /* Rojo */
+}
+
+/* Estilos para notificaciones informativas */
+.notificacion.informativo {
+    background-color: #17a2b8; /* Azul */
+}
+
+/* Estilo para el botón de cerrar */
+.notificacion .cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+}
